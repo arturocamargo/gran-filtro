@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400">
+<title>Crédito Valor — Plan de Lanzamiento</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', 'Open Sans', -apple-system, sans-serif;
+    background: #0A0E12;
+    color: #d4d8e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .slide {
+    width: 1400px;
+    min-height: 788px;
+    margin: 0 auto;
+    padding: 36px 64px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    page-break-after: always;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .header h1 span {
+    color: #E6C78A;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #8A9BB8;
+    margin-top: 6px;
+    font-weight: 400;
+  }
+  .header .badge {
+    background: rgba(230, 199, 138, 0.12);
+    border: 1px solid rgba(230, 199, 138, 0.30);
+    color: #E6C78A;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  .footer-note {
+    position: absolute;
+    bottom: 16px;
+    left: 64px;
+    right: 64px;
+    font-size: 10px;
+    color: #4A5D75;
+    text-align: center;
+  }
+
+  /* CARDS */
+  .card {
+    background: rgba(26,36,51,0.50);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  /* INSIGHT BAR */
+  .insight-bar {
+    margin-top: 16px;
+    background: linear-gradient(90deg, rgba(230,199,138,0.08), rgba(230,199,138,0.02));
+    border: 1px solid rgba(230,199,138,0.18);
+    border-radius: 12px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .insight-icon { font-size: 24px; flex-shrink: 0; }
+  .insight-text { font-size: 13px; color: #B8C4D6; line-height: 1.5; }
+  .insight-text strong { color: #fff; font-weight: 600; }
+
+  /* ==========================================
+     SLIDE 0: PORTADA
+     ========================================== */
+  .slide-portada {
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 120px;
+  }
+  .portada-accent {
+    width: 4px;
+    height: 200px;
+    background: linear-gradient(180deg, #E6C78A, rgba(230,199,138,0.10));
+    border-radius: 2px;
+    position: absolute;
+    left: 64px;
+    top: 180px;
+  }
+  .portada-title {
+    font-size: 72px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -2px;
+    line-height: 1.05;
+    margin-left: 24px;
+  }
+  .portada-title em {
+    font-style: normal;
+    color: #E6C78A;
+  }
+  .portada-sub {
+    font-size: 18px;
+    color: #8A9BB8;
+    margin-top: 20px;
+    margin-left: 24px;
+    font-weight: 400;
+  }
+  .portada-year {
+    position: absolute;
+    bottom: 80px;
+    left: 64px;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 4px;
+  }
+
+  /* ==========================================
+     SLIDE 1: VIDEO
+     ========================================== */
+  .video-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .video-frame {
+    width: 960px;
+    height: 540px;
+    background: rgba(26,36,51,0.60);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-play {
+    width: 80px;
+    height: 80px;
+    background: rgba(230,199,138,0.20);
+    border: 2px solid rgba(230,199,138,0.50);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #E6C78A;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .video-play:hover { background: rgba(230,199,138,0.35); }
+  .video-label {
+    position: absolute;
+    bottom: 16px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #6B7D99;
+  }
+
+  /* ==========================================
+     SLIDE 2: OFERTA COMERCIAL
+     ========================================== */
+  .oferta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 8px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .oferta-col-header {
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .oferta-col-header.antes {
+    background: rgba(49,69,102,0.30);
+    color: #8A9BB8;
+  }
+  .oferta-col-header.despues {
+    background: rgba(230,199,138,0.15);
+    color: #E6C78A;
+  }
+  .oferta-row {
+    display: contents;
+  }
+  .oferta-label {
+    padding: 14px 24px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #6B7D99;
+    background: rgba(26,36,51,0.40);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    grid-column: 1 / -1;
+  }
+  .oferta-cell {
+    padding: 14px 24px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .oferta-cell.antes-val {
+    color: #8A9BB8;
+    background: rgba(26,36,51,0.20);
+  }
+  .oferta-cell.despues-val {
+    color: #fff;
+    background: rgba(26,36,51,0.10);
+  }
+  .oferta-cell .highlight {
+    color: #E6C78A;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* ==========================================
+     SLIDE 3: RADIOGRAFÍA
+     ========================================== */
+  .radio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .radio-card {
+    background: rgba(26,36,51,0.50);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .radio-card-header {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .radio-card-num {
+    font-size: 48px;
+    font-weight: 800;
+    color: rgba(49,69,102,0.30);
+    margin-top: auto;
+    text-align: right;
+  }
+  .radio-item {
+    font-size: 13px;
+    color: #B8C4D6;
+    line-height: 1.5;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .radio-item::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: #E6C78A;
+    font-weight: 700;
+  }
+
+  /* ==========================================
+     SLIDE 4: SEGMENTACIÓN
+     ========================================== */
+  .seg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+  .seg-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .seg-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #6B7D99;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .seg-table td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #B8C4D6;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .seg-table td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: #E6C78A;
+  }
+  .seg-note {
+    font-size: 12px;
+    color: #6B7D99;
+    line-height: 1.5;
+    padding: 16px;
+    background: rgba(230,199,138,0.05);
+    border: 1px solid rgba(230,199,138,0.12);
+    border-radius: 12px;
+  }
+
+  /* ==========================================
+     SLIDE 5: FASES DE LANZAMIENTO
+     ========================================== */
+  .fases-timeline {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex: 1;
+    align-items: stretch;
+    min-height: 480px;
+  }
+  .fase-card {
+    flex: 1;
+    background: rgba(26,36,51,0.50);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .fase-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+  .fase-card:nth-child(1)::before { background: rgba(49,69,102,0.60); }
+  .fase-card:nth-child(2)::before { background: rgba(49,69,102,0.80); }
+  .fase-card:nth-child(3)::before { background: rgba(138,155,184,0.60); }
+  .fase-card:nth-child(4)::before { background: rgba(230,199,138,0.50); }
+  .fase-card:nth-child(5)::before { background: rgba(230,199,138,0.80); }
+  .fase-card:nth-child(6)::before { background: rgba(230,199,138,1.00); }
+  .fase-num {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #6B7D99;
+    margin-bottom: 4px;
+  }
+  .fase-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .fase-date {
+    font-size: 11px;
+    font-weight: 700;
+    color: #E6C78A;
+    margin-bottom: 6px;
+  }
+  .fase-desc {
+    font-size: 11px;
+    color: #8A9BB8;
+    line-height: 1.45;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     SLIDE 0: PORTADA
+     ============================================ -->
+<div class="slide slide-portada">
+  <div class="portada-accent"></div>
+  <div class="portada-title">CRÉDITO<br><em>VALOR</em></div>
+  <div class="portada-sub">Plan de lanzamiento · Oferta Comercial 2025</div>
+  <div class="portada-year">2025</div>
+</div>
+
+<!-- ============================================
+     SLIDE 1: VIDEO
+     ============================================ -->
+<div class="slide">
+  <div class="header">
+    <div>
+      <h1><span>Crédito Valor</span> — Producto</h1>
+      <div class="subtitle">Video explicativo del producto</div>
+    </div>
+    <div class="badge">Video</div>
+  </div>
+  <div class="video-container">
+    <div class="video-frame" style="padding: 0;">
+      <video controls style="width: 100%; height: 100%; border-radius: 16px; object-fit: cover;">
+        <source src="video-credito-valor.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 2: OFERTA COMERCIAL
+     ============================================ -->
+<div class="slide">
+  <div class="header">
+    <div>
+      <h1><span>Crédito Valor</span> — Oferta Comercial</h1>
+      <div class="subtitle">Comparativa esquema actual vs nuevo esquema</div>
+    </div>
+    <div class="badge">Producto</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 340px 1fr; gap: 32px; flex: 1; align-items: start;">
+    <!-- Left: key change callout -->
+    <div style="margin-top: 24px;">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6B7D99; margin-bottom: 16px;">Cambio principal</div>
+      <div style="font-size: 56px; font-weight: 800; color: #E6C78A; line-height: 1;">9.99%</div>
+      <div style="font-size: 14px; color: #8A9BB8; margin-top: 8px;">tasa anual <span style="text-decoration: line-through; color: #4A5D75;">10.99%</span></div>
+      <div style="margin-top: 32px; padding: 16px; background: rgba(230,199,138,0.08); border: 1px solid rgba(230,199,138,0.15); border-radius: 12px;">
+        <div style="font-size: 13px; color: #B8C4D6; line-height: 1.5;">
+          <strong style="color: #fff;">100 bps de reducción</strong> para posicionar el producto como la opción más competitiva del mercado.
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: comparison table -->
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th style="padding: 16px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B7D99; text-align: left; width: 140px; border-bottom: 1px solid rgba(255,255,255,0.08);"></th>
+            <th style="padding: 16px 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #8A9BB8; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(49,69,102,0.15);">Esquema Actual</th>
+            <th style="padding: 16px 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #E6C78A; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(230,199,138,0.08);">Nuevo Esquema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: rgba(230,199,138,0.04);">
+            <td style="padding: 14px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #E6C78A; border-bottom: 1px solid rgba(255,255,255,0.04);">Tasa</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #8A9BB8; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(49,69,102,0.08);"><span style="text-decoration: line-through; opacity: 0.6;">10.99%</span> anual</td>
+            <td style="padding: 14px 20px; font-size: 15px; color: #E6C78A; font-weight: 700; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(230,199,138,0.08);">9.99% anual</td>
+          </tr>
+          <tr>
+            <td style="padding: 14px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B7D99; border-bottom: 1px solid rgba(255,255,255,0.04);">Monto</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #8A9BB8; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(49,69,102,0.08);">$38,000 a $500,000 MXN</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #B8C4D6; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(230,199,138,0.05);">$38,000 a $500,000 MXN</td>
+          </tr>
+          <tr>
+            <td style="padding: 14px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B7D99; border-bottom: 1px solid rgba(255,255,255,0.04);">Plazo</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #8A9BB8; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(49,69,102,0.08);">12, 24 o 36 meses</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #B8C4D6; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(230,199,138,0.05);">12, 24 o 36 meses</td>
+          </tr>
+          <tr>
+            <td style="padding: 14px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B7D99; border-bottom: 1px solid rgba(255,255,255,0.04);">Periodicidad</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #8A9BB8; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(49,69,102,0.08);">Mensual (k+i)</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #B8C4D6; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(230,199,138,0.05);">Mensual (k+i)</td>
+          </tr>
+          <tr>
+            <td style="padding: 14px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B7D99; border-bottom: 1px solid rgba(255,255,255,0.04);">Comisión</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #8A9BB8; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(49,69,102,0.08);">1.0% sobre monto</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #B8C4D6; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(230,199,138,0.05);">1.0% sobre monto</td>
+          </tr>
+          <tr>
+            <td style="padding: 14px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B7D99; border-bottom: 1px solid rgba(255,255,255,0.04);">Aforo</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #8A9BB8; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(49,69,102,0.08);">1.2 a 1</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #B8C4D6; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); background: rgba(230,199,138,0.05);">1.2 a 1</td>
+          </tr>
+          <tr>
+            <td style="padding: 14px 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B7D99;">Bloqueo</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #8A9BB8; text-align: center; background: rgba(49,69,102,0.08);">Bloqueo de inversión</td>
+            <td style="padding: 14px 20px; font-size: 14px; color: #B8C4D6; text-align: center; background: rgba(230,199,138,0.05);">Bloqueo de inversión</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="insight-bar" style="margin-top: 20px;">
+    <div class="insight-icon">◆</div>
+    <div class="insight-text">
+      <strong>Benchmark G7:</strong> Actinver ofrece la tasa más baja del mercado — <strong style="color: #E6C78A;">9.99%</strong> vs mínima del G7 desde ~18%. CAT Informativo: <strong style="color: #E6C78A;">14.09%</strong> vs promedio G7 de ~38%. Monto competitivo hasta $5 MDP (presencial) y $500K (digital).
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 3: RADIOGRAFÍA DEL CLIENTE
+     ============================================ -->
+<div class="slide">
+  <div class="header">
+    <div>
+      <h1><span>Crédito Valor</span> — Radiografía del Cliente</h1>
+      <div class="subtitle">Universo precalificado: <strong style="color: #E6C78A;">por confirmar</strong></div>
+    </div>
+    <div class="badge">Cliente</div>
+  </div>
+
+  <div class="radio-grid">
+    <!-- Card 1: Perfil -->
+    <div class="radio-card">
+      <div class="radio-card-header">Perfil del Cliente</div>
+      <div class="radio-item">Persona física mexicana</div>
+      <div class="radio-item">18–65 años</div>
+      <div class="radio-item">No empleado Actinver</div>
+      <div class="radio-item">Sin actividad empresarial</div>
+      <div class="radio-item">Estado civil no casado por bienes mancomunados</div>
+      <div class="radio-item">Identificación oficial vigente</div>
+      <div class="radio-card-num">01</div>
+    </div>
+
+    <!-- Card 2: Relación -->
+    <div class="radio-card">
+      <div class="radio-card-header">Relación con Actinver</div>
+      <div class="radio-item">Contrato aprobado y activo</div>
+      <div class="radio-item">Antigüedad mínima: 3 meses</div>
+      <div class="radio-item">Contrato Marco de Productos y Servicios Bancarios</div>
+      <div class="radio-item">Sin Crédito Valor activo</div>
+      <div class="radio-item">Cliente enrolado y documentado</div>
+      <div class="radio-card-num">02</div>
+    </div>
+
+    <!-- Card 3: Posición -->
+    <div class="radio-card">
+      <div class="radio-card-header">Posición e Inversión</div>
+      <div class="radio-item">Portafolio mínimo: $45,000 MXN</div>
+      <div class="radio-item">Score de crédito mínimo: 652 pts</div>
+      <div class="radio-item">Aforo: 1.2 a 1</div>
+      <div class="radio-item">Monto de crédito basado en inversión disponible</div>
+      <div class="radio-card-num">03</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 4: SEGMENTACIÓN ESTRATÉGICA
+     ============================================ -->
+<div class="slide">
+  <div class="header">
+    <div>
+      <h1><span>Crédito Valor</span> — Segmentación Estratégica</h1>
+      <div class="subtitle">Objetivo: alcanzar <strong style="color: #E6C78A;">5% de activación</strong> sobre el universo precalificado en los primeros 3 meses</div>
+    </div>
+    <div class="badge">Segmentos</div>
+  </div>
+
+  <div class="seg-grid">
+    <!-- Left: table -->
+    <div class="card">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6B7D99; margin-bottom: 16px;">Universo por segmento</div>
+      <table class="seg-table">
+        <thead>
+          <tr>
+            <th>Segmento</th>
+            <th style="text-align: right;">Universo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Patrimonial</td>
+            <td>— por confirmar —</td>
+          </tr>
+          <tr>
+            <td>Banca Privada</td>
+            <td>— por confirmar —</td>
+          </tr>
+          <tr>
+            <td>Wealth Management</td>
+            <td>— por confirmar —</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
+        <div style="font-size: 13px; color: #8A9BB8;">Total precalificado: <strong style="color: #E6C78A;">por confirmar</strong></div>
+      </div>
+    </div>
+
+    <!-- Right: notes -->
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="card">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6B7D99; margin-bottom: 12px;">Segmentos objetivo</div>
+        <div style="font-size: 14px; color: #B8C4D6; line-height: 1.6;">
+          <strong style="color: #fff;">Patrimonial · Banca Privada · Wealth Management.</strong><br>
+          Comunicación diferenciada por segmento y canal de distribución.
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6B7D99; margin-bottom: 12px;">Expediente incompleto</div>
+        <div style="font-size: 14px; color: #B8C4D6; line-height: 1.6;">
+          Se incluirá comunicación específica para incorporar clientes con expediente incompleto al universo precalificado.
+        </div>
+      </div>
+      <div class="insight-bar" style="margin-top: 0;">
+        <div class="insight-icon">◆</div>
+        <div class="insight-text">
+          <strong>Meta: 5% de activación en 3 meses.</strong>
+          Cada segmento tendrá un approach diferenciado: asesor directo para BP/WM, y canales digitales para Patrimonial.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 5: FASES DE LANZAMIENTO
+     ============================================ -->
+<div class="slide">
+  <div class="header">
+    <div>
+      <h1><span>Crédito Valor</span> — Fases de Lanzamiento</h1>
+      <div class="subtitle">Timeline de ejecución · Febrero 2025 en adelante</div>
+    </div>
+    <div class="badge">Lanzamiento</div>
+  </div>
+
+  <div class="fases-timeline">
+    <!-- Fase 1 -->
+    <div class="fase-card">
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(49,69,102,0.50); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #8A9BB8; margin-bottom: 12px;">1</div>
+      <div class="fase-num">Fase 1</div>
+      <div class="fase-title">Planeación</div>
+      <div class="fase-date">Febrero–marzo</div>
+      <div class="fase-desc">Creación de comunicación, fijar canales y journey de comunicación, establecer fechas de las distintas acciones.</div>
+      <div style="margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 5px;">
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">Canales</span>
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">Journey</span>
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">Calendario</span>
+      </div>
+    </div>
+
+    <!-- Fase 2 -->
+    <div class="fase-card">
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(49,69,102,0.60); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #8A9BB8; margin-bottom: 12px;">2</div>
+      <div class="fase-num">Fase 2</div>
+      <div class="fase-title">Pruebas UAT</div>
+      <div class="fase-date">17 mar – 20 mar</div>
+      <div class="fase-desc">Validaciones internas de flujo e información en CRM.</div>
+      <div style="margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 5px;">
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">CRM</span>
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">Flujo</span>
+      </div>
+    </div>
+
+    <!-- Fase 3 -->
+    <div class="fase-card">
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(138,155,184,0.40); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #B8C4D6; margin-bottom: 12px;">3</div>
+      <div class="fase-num">Fase 3</div>
+      <div class="fase-title">Comunicación interna | Kick off asesores</div>
+      <div class="fase-date">18 mar – 25 mar</div>
+      <div class="fase-desc">Dar a conocer el producto con colaboradores, asesores, anfitriones y CAT. Se prepararán materiales, características del producto, FAQs y tutorial.</div>
+      <div style="margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 5px;">
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">Asesores</span>
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">FAQs</span>
+        <span style="font-size: 10px; background: rgba(49,69,102,0.30); color: #8A9BB8; padding: 3px 8px; border-radius: 4px;">Tutorial</span>
+      </div>
+    </div>
+
+    <!-- Fase 4 -->
+    <div class="fase-card">
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(230,199,138,0.25); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #E6C78A; margin-bottom: 12px;">4</div>
+      <div class="fase-num">Fase 4</div>
+      <div class="fase-title">Rollout en app</div>
+      <div class="fase-date">26 mar</div>
+      <div class="fase-desc">El producto se liberará de forma gradual dentro de la app, mostrándose orgánicamente a clientes precalificados.</div>
+      <div style="margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 5px;">
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">App</span>
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">Orgánico</span>
+      </div>
+    </div>
+
+    <!-- Fase 5 -->
+    <div class="fase-card">
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(230,199,138,0.35); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #E6C78A; margin-bottom: 12px;">5</div>
+      <div class="fase-num">Fase 5</div>
+      <div class="fase-title">Campaña de comunicación con clientes</div>
+      <div class="fase-date">13 abr – 30 abr</div>
+      <div class="fase-desc">Activación de campañas dirigidas a clientes precalificados. Canales: Asesores, Push, InApp, SMS, WhatsApp, Email y RRSS.</div>
+      <div style="margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 5px;">
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">Push</span>
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">InApp</span>
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">WhatsApp</span>
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">Email</span>
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">RRSS</span>
+      </div>
+    </div>
+
+    <!-- Fase 6 -->
+    <div class="fase-card">
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(230,199,138,0.50); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #E6C78A; margin-bottom: 12px;">6</div>
+      <div class="fase-num">Fase 6</div>
+      <div class="fase-title">Seguimiento y optimizaciones</div>
+      <div class="fase-date">Meses posteriores</div>
+      <div class="fase-desc">La base de clientes se actualiza mensualmente para incorporar nuevos clientes precalificados.</div>
+      <div style="margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 5px;">
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">Optimización</span>
+        <span style="font-size: 10px; background: rgba(230,199,138,0.15); color: #E6C78A; padding: 3px 8px; border-radius: 4px;">Base mensual</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
