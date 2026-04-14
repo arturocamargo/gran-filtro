@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400">
+<title>Gran Filtro — Actualización Q1 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', 'Open Sans', -apple-system, sans-serif;
+    background: #0A0E12;
+    color: #d4d8e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .slide {
+    width: 1400px;
+    min-height: 788px;
+    margin: 0 auto;
+    padding: 36px 64px;
+    position: relative;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .header h1 span {
+    color: #E6C78A;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: #8A9BB8;
+    margin-top: 6px;
+    font-weight: 400;
+  }
+  .header .badge {
+    background: rgba(230, 199, 138, 0.12);
+    border: 1px solid rgba(230, 199, 138, 0.30);
+    color: #E6C78A;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* FUNNEL PANELS */
+  .funnel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .funnel-panel {
+    background: rgba(26,36,51,0.50);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 20px 24px;
+  }
+  .funnel-panel.q1 {
+    border-color: rgba(49, 69, 102, 0.40);
+  }
+  .funnel-panel.march {
+    border-color: rgba(230, 199, 138, 0.30);
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .panel-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+  .q1 .panel-label {
+    background: rgba(49, 69, 102, 0.35);
+    color: #8A9BB8;
+  }
+  .march .panel-label {
+    background: rgba(230, 199, 138, 0.18);
+    color: #E6C78A;
+  }
+  .panel-period {
+    font-size: 14px;
+    color: #8A9BB8;
+    font-weight: 400;
+  }
+
+  /* FUNNEL STEPS */
+  .funnel-step {
+    position: relative;
+    margin-bottom: 2px;
+  }
+  .funnel-bar {
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .funnel-bar:hover {
+    filter: brightness(1.15);
+  }
+  .step-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .step-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .step-desc {
+    font-size: 10px;
+    font-weight: 400;
+    margin-left: 6px;
+  }
+  .q1 .step-desc { color: #6B7D99; }
+  .march .step-desc { color: rgba(230,199,138,0.5); }
+  .step-volume {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* Conversion arrows */
+  .conversion-row {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 20px;
+    gap: 8px;
+    height: 18px;
+  }
+  .conversion-arrow {
+    color: #4A5D75;
+    font-size: 11px;
+  }
+  .conversion-rate {
+    font-size: 12px;
+    font-weight: 600;
+    color: #8A9BB8;
+  }
+  .march .conversion-rate {
+    color: #E6C78A;
+  }
+
+  /* Funnel bar widths - Q1 */
+  .q1 .bar-leads   { background: linear-gradient(90deg, rgba(49,69,102,0.20), rgba(49,69,102,0.35)); width: 100%; }
+  .q1 .bar-mqls    { background: linear-gradient(90deg, rgba(49,69,102,0.55), rgba(49,69,102,0.25)); width: 78%; }
+  .q1 .bar-sqls    { background: linear-gradient(90deg, rgba(49,69,102,0.45), rgba(49,69,102,0.20)); width: 36%; }
+  .q1 .bar-clientes{ background: linear-gradient(90deg, rgba(49,69,102,0.38), rgba(49,69,102,0.15)); width: 24%; }
+  .q1 .bar-aum     { background: linear-gradient(90deg, rgba(49,69,102,0.32), rgba(49,69,102,0.12)); width: 100%; }
+
+  /* Funnel bar widths - March */
+  .march .bar-leads   { background: linear-gradient(90deg, rgba(230,199,138,0.15), rgba(230,199,138,0.30)); width: 100%; }
+  .march .bar-mqls    { background: linear-gradient(90deg, rgba(230,199,138,0.40), rgba(230,199,138,0.15)); width: 78%; }
+  .march .bar-sqls    { background: linear-gradient(90deg, rgba(230,199,138,0.50), rgba(230,199,138,0.20)); width: 30%; }
+  .march .bar-clientes{ background: linear-gradient(90deg, rgba(230,199,138,0.45), rgba(230,199,138,0.18)); width: 20%; }
+  .march .bar-aum     { background: linear-gradient(90deg, rgba(230,199,138,0.38), rgba(230,199,138,0.14)); width: 100%; }
+
+  /* AUM PROMEDIO */
+  .mix-section {
+    margin-top: 12px;
+  }
+  .costs-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #6B7D99;
+    margin-bottom: 4px;
+  }
+
+  /* COSTS PANEL */
+  .costs-row {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .costs-panel {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 14px 20px;
+  }
+  .cost-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .cost-item .cost-label {
+    font-size: 11px;
+    color: #6B7D99;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .cost-item .cost-value {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .q1-costs .cost-value { color: #8A9BB8; }
+  .march-costs .cost-value { color: #E6C78A; }
+
+  /* INSIGHT BAR */
+  .insight-bar {
+    margin-top: 16px;
+    background: linear-gradient(90deg, rgba(230,199,138,0.08), rgba(230,199,138,0.02));
+    border: 1px solid rgba(230,199,138,0.18);
+    border-radius: 12px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .insight-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .insight-text {
+    font-size: 13px;
+    color: #B8C4D6;
+    line-height: 1.5;
+  }
+  .insight-text strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: #4A5D75;
+    margin-top: 16px;
+  }
+
+  .page-break {
+    height: 1px;
+    background: rgba(255,255,255,0.04);
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: FUNNEL Q1 2026 — Acumulado vs Marzo                 -->
+<!-- ============================================================ -->
+<div class="slide">
+  <div class="header">
+    <div>
+      <h1><span>Gran Filtro</span> — Funnel Q1 2026</h1>
+      <div class="subtitle">Acumulado enero–marzo vs resultados de marzo</div>
+    </div>
+    <div class="badge">Q1 2026</div>
+  </div>
+
+  <div class="funnel-grid">
+
+    <!-- LEFT: Q1 2026 Acumulado -->
+    <div class="funnel-panel q1">
+      <div class="panel-header">
+        <div class="panel-label">Q1 2026 · Ene–Mar</div>
+        <div class="panel-period">Acumulado trimestral</div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="funnel-bar bar-leads" style="background: linear-gradient(90deg, rgba(49,69,102,0.20), rgba(49,69,102,0.35)); width: 100%;">
+          <div class="step-left"><span class="step-name">Leads</span><span class="step-desc">Completaron formulario</span></div>
+          <span class="step-volume">15,372</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">78% se califica como MQL</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-mqls">
+          <div class="step-left"><span class="step-name">MQLs</span><span class="step-desc">Marketing Qualified</span></div>
+          <span class="step-volume">11,925</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">13.9% convierte a SQL</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-sqls">
+          <div class="step-left"><span class="step-name">SQLs</span><span class="step-desc">Sales Qualified</span></div>
+          <span class="step-volume">1,654</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">25.0% cierra</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-clientes">
+          <div class="step-left"><span class="step-name">Clientes</span></div>
+          <span class="step-volume">414</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">AUM captado trimestral</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-aum">
+          <div class="step-left"><span class="step-name">AUM</span></div>
+          <span class="step-volume">$369.4M</span>
+        </div>
+      </div>
+
+      <div class="mix-section">
+        <div class="costs-title">AUM promedio por cliente</div>
+        <div style="font-size: 22px; font-weight: 800; color: #8A9BB8;">$892K</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Marzo 2026 -->
+    <div class="funnel-panel march">
+      <div class="panel-header">
+        <div class="panel-label">Marzo 2026</div>
+        <div class="panel-period">Resultados del mes</div>
+      </div>
+
+      <div class="funnel-step">
+        <div class="funnel-bar bar-leads" style="background: linear-gradient(90deg, rgba(230,199,138,0.15), rgba(230,199,138,0.30)); width: 100%;">
+          <div class="step-left"><span class="step-name">Leads</span><span class="step-desc">Completaron formulario</span></div>
+          <span class="step-volume">4,455</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">78% se califica como MQL</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-mqls">
+          <div class="step-left"><span class="step-name">MQLs</span><span class="step-desc">Marketing Qualified</span></div>
+          <span class="step-volume">3,453</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">13.3% convierte a SQL</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-sqls">
+          <div class="step-left"><span class="step-name">SQLs</span><span class="step-desc">Sales Qualified</span></div>
+          <span class="step-volume">460</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">24.8% cierra</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-clientes">
+          <div class="step-left"><span class="step-name">Clientes</span></div>
+          <span class="step-volume">114</span>
+        </div>
+      </div>
+      <div class="conversion-row">
+        <span class="conversion-arrow">↓</span>
+        <span class="conversion-rate">AUM captado mensual</span>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-bar bar-aum">
+          <div class="step-left"><span class="step-name">AUM</span></div>
+          <span class="step-volume">$90.2M</span>
+        </div>
+      </div>
+
+      <div class="mix-section">
+        <div class="costs-title">AUM promedio por cliente</div>
+        <div style="font-size: 22px; font-weight: 800; color: #E6C78A;">$791K</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COSTS COMPARISON -->
+  <div class="costs-row">
+    <div class="costs-panel q1-costs">
+      <div class="costs-title">Costos · Q1 2026 Acumulado</div>
+      <div class="cost-items">
+        <div class="cost-item">
+          <div class="cost-label">CAC</div>
+          <div class="cost-value">$6,497</div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-label">CPSQL</div>
+          <div class="cost-value">$1,574</div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-label">CX $100K AUM</div>
+          <div class="cost-value">$733</div>
+        </div>
+      </div>
+    </div>
+    <div class="costs-panel march-costs">
+      <div class="costs-title">Costos · Marzo 2026</div>
+      <div class="cost-items">
+        <div class="cost-item">
+          <div class="cost-label">CAC</div>
+          <div class="cost-value">$7,872</div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-label">CPSQL</div>
+          <div class="cost-value">$1,951</div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-label">CX $100K AUM</div>
+          <div class="cost-value">$995</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM INSIGHT -->
+  <div class="insight-bar">
+    <div class="insight-icon">◆</div>
+    <div class="insight-text">
+      <strong>Q1 acumulado: 414 clientes y $369M en AUM con un AUM promedio de $892K.</strong>
+      Marzo: 114 clientes con AUM promedio $791K. Mix +$300K: 60% en marzo, 54% en Q1.
+    </div>
+  </div>
+
+  <div class="footer-note">Datos: WBR Gran Filtro · Q1 2026 (enero–marzo)</div>
+</div>
+
+
+<div class="page-break"></div>
+
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: CÓMO LLEGAMOS A 35%                                 -->
+<!-- ============================================================ -->
+<div class="slide" style="min-height: 788px; padding-top: 44px; padding-bottom: 40px; page-break-before: always;">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1><span>Gran Filtro</span> — Cómo Llegamos a 35%</h1>
+      <div class="subtitle">Dos frentes de ejecución para cerrar la brecha de conversión SQL → Cliente</div>
+    </div>
+    <div style="display: flex; align-items: flex-start; gap: 20px;">
+      <div class="badge">Roadmap</div>
+      <div style="text-align: right;">
+        <div style="font-size: 12px; color: #6B7D99; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Target</div>
+        <div style="font-size: 48px; font-weight: 800; color: #E6C78A; line-height: 1;">35%</div>
+        <div style="font-size: 12px; color: #6B7D99; margin-top: 4px;">Hoy: 25%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress bar: 25% → 35% -->
+  <div style="margin-top: 28px; margin-bottom: 36px;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+      <span style="font-size: 11px; font-weight: 700; color: #8A9BB8; letter-spacing: 0.5px;">PROGRESO HACIA EL TARGET</span>
+      <span style="font-size: 11px; color: #6B7D99;">25% de 35%</span>
+    </div>
+    <div style="height: 8px; background: rgba(49,69,102,0.35); border-radius: 4px; overflow: hidden; position: relative;">
+      <div style="width: 71.4%; height: 100%; background: linear-gradient(90deg, #314566, #E6C78A); border-radius: 4px;"></div>
+      <div style="position: absolute; right: 0; top: -2px; width: 2px; height: 12px; background: #E6C78A; border-radius: 1px; opacity: 0.5;"></div>
+    </div>
+  </div>
+
+  <!-- TWO-COLUMN LAYOUT -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
+
+    <!-- LEFT COLUMN: Acciones en Marcha -->
+    <div style="background: rgba(26,36,51,0.45); border: 1px solid rgba(230,199,138,0.15); border-radius: 16px; padding: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+        <div style="width: 36px; height: 36px; background: rgba(230,199,138,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px;">⚡</div>
+        <div>
+          <div style="font-size: 16px; font-weight: 700; color: #fff;">Acciones en Marcha</div>
+          <div style="font-size: 11px; color: #6B7D99; margin-top: 1px;">Quick wins · Ejecución inmediata</div>
+        </div>
+      </div>
+
+      <!-- Item 1: Alineación semanal -->
+      <div style="display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start;">
+        <div style="min-width: 22px; height: 22px; border-radius: 6px; background: rgba(230,199,138,0.15); border: 1.5px solid #E6C78A; display: flex; align-items: center; justify-content: center; margin-top: 1px;">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #E6C78A;"></div>
+        </div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3;">Alineación semanal con Comercial</div>
+          <div style="font-size: 12px; color: #8A9BB8; margin-top: 4px; line-height: 1.5;">Action item: Definir un grupo especial para atención de SQLs.</div>
+          <div style="display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #E6C78A; background: rgba(230,199,138,0.10); padding: 3px 10px; border-radius: 4px;">En progreso</div>
+        </div>
+      </div>
+
+      <!-- Item 2: Optimización CFs -->
+      <div style="display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start;">
+        <div style="min-width: 22px; height: 22px; border-radius: 6px; background: rgba(230,199,138,0.15); border: 1.5px solid #E6C78A; display: flex; align-items: center; justify-content: center; margin-top: 1px;">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #E6C78A;"></div>
+        </div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3;">Optimización de Centros Financieros</div>
+          <div style="font-size: 12px; color: #8A9BB8; margin-top: 4px; line-height: 1.5;">Action item: Redistribución de presupuesto a CFs con mejor performance.</div>
+          <div style="display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #E6C78A; background: rgba(230,199,138,0.10); padding: 3px 10px; border-radius: 4px;">En progreso</div>
+        </div>
+      </div>
+
+      <!-- Item 3: Optimización Campañas -->
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div style="min-width: 22px; height: 22px; border-radius: 6px; background: rgba(230,199,138,0.15); border: 1.5px solid #E6C78A; display: flex; align-items: center; justify-content: center; margin-top: 1px;">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #E6C78A;"></div>
+        </div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3;">Optimización de Campañas y Materiales</div>
+          <div style="font-size: 12px; color: #8A9BB8; margin-top: 4px; line-height: 1.5;">Action item: Reactivar Google Performance Max para incrementar volumen de leads.</div>
+          <div style="display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #E6C78A; background: rgba(230,199,138,0.10); padding: 3px 10px; border-radius: 4px;">En progreso</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Proyectos Habilitadores -->
+    <div style="background: rgba(26,36,51,0.45); border: 1px solid rgba(49,69,102,0.40); border-radius: 16px; padding: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+        <div style="width: 36px; height: 36px; background: rgba(49,69,102,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🔧</div>
+        <div>
+          <div style="font-size: 16px; font-weight: 700; color: #fff;">Proyectos Habilitadores</div>
+          <div style="font-size: 11px; color: #6B7D99; margin-top: 1px;">Cambios estructurales · Mayor impacto</div>
+        </div>
+      </div>
+
+      <!-- Item 1: Onboarding N4 — IN PROGRESS -->
+      <div style="display: flex; gap: 14px; margin-bottom: 28px; align-items: flex-start;">
+        <div style="min-width: 22px; height: 22px; border-radius: 6px; background: rgba(230,199,138,0.15); border: 1.5px solid #E6C78A; display: flex; align-items: center; justify-content: center; margin-top: 1px;">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #E6C78A;"></div>
+        </div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3;">Onboarding N4 Digital</div>
+          <div style="font-size: 12px; color: #8A9BB8; margin-top: 4px; line-height: 1.5;">Eliminar la fricción de ir al Centro Financiero a firmar. El cliente completa su apertura 100% digital.</div>
+          <div style="display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #E6C78A; background: rgba(230,199,138,0.10); padding: 3px 10px; border-radius: 4px;">In Progress</div>
+          <!-- Risk callout -->
+          <div style="margin-top: 12px; background: rgba(230,199,138,0.06); border-left: 3px solid rgba(230,199,138,0.30); border-radius: 0 8px 8px 0; padding: 12px 16px;">
+            <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #E6C78A; margin-bottom: 4px;">⚠ Riesgo identificado</div>
+            <div style="font-size: 12px; color: #8A9BB8; line-height: 1.5;">La cuenta N4 está topada a 30,000 UDIs — se queda corta vs. el fondeo inicial promedio de los clientes.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2: Chatbot — PENDIENTE -->
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div style="min-width: 22px; height: 22px; border-radius: 6px; background: rgba(49,69,102,0.25); border: 1.5px solid #314566; display: flex; align-items: center; justify-content: center; margin-top: 1px;">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #314566;"></div>
+        </div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600; color: #fff; line-height: 1.3;">Chatbot de Contactabilidad</div>
+          <div style="font-size: 12px; color: #8A9BB8; margin-top: 4px; line-height: 1.5;">Mejorar la tasa de contacto tanto en MQLs como en SQLs mediante un chatbot automatizado que agilice la primera interacción.</div>
+          <div style="display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #6B7D99; background: rgba(49,69,102,0.20); padding: 3px 10px; border-radius: 4px;">Pendiente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM: Insight -->
+  <div style="margin-top: 28px;">
+    <div class="insight-bar" style="margin-top: 0;">
+      <div class="insight-icon">◆</div>
+      <div class="insight-text">
+        <strong>Las acciones en marcha atacan la conversión a corto plazo; los proyectos habilitadores desbloquean escala.</strong>
+        El grupo especial de SQLs + redistribución de presupuesto a CFs top + reactivación de Performance Max son los motores de Q2.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">Información proporcionada por Dirección Growth · Abril 2026</div>
+</div>
+
+
+</body>
+</html>
