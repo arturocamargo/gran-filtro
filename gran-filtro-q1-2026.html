@@ -255,6 +255,35 @@
     font-weight: 600;
   }
 
+  /* MIX QUALITY BARS */
+  .mix-bar-container {
+    display: flex;
+    height: 22px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .mix-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .q1 .mix-high {
+    background: rgba(138, 155, 184, 0.50);
+  }
+  .q1 .mix-mid {
+    background: rgba(49, 69, 102, 0.55);
+  }
+  .march .mix-high {
+    background: rgba(230, 199, 138, 0.50);
+  }
+  .march .mix-mid {
+    background: rgba(49, 69, 102, 0.55);
+  }
+
   .footer-note {
     text-align: center;
     font-size: 11px;
@@ -342,6 +371,11 @@
       <div class="mix-section">
         <div class="costs-title">AUM promedio por cliente</div>
         <div style="font-size: 22px; font-weight: 800; color: #8A9BB8;">$892K</div>
+        <div class="mix-bar-container" style="margin-top: 10px;">
+          <div class="mix-segment mix-high" style="width: 56%;">56% &gt; $300K</div>
+          <div class="mix-segment mix-mid" style="width: 44%;">44% $100–300K</div>
+        </div>
+        <div style="font-size: 10px; color: #6B7D99; margin-top: 5px; font-weight: 500;">233 cierres &gt; $300K · AUM prom. $1.5M</div>
       </div>
     </div>
 
@@ -402,6 +436,11 @@
       <div class="mix-section">
         <div class="costs-title">AUM promedio por cliente</div>
         <div style="font-size: 22px; font-weight: 800; color: #E6C78A;">$791K</div>
+        <div class="mix-bar-container" style="margin-top: 10px;">
+          <div class="mix-segment mix-high" style="width: 60%;">60% &gt; $300K</div>
+          <div class="mix-segment mix-mid" style="width: 40%;">40% $100–300K</div>
+        </div>
+        <div style="font-size: 10px; color: rgba(230,199,138,0.5); margin-top: 5px; font-weight: 500;">68 cierres &gt; $300K · AUM prom. $1.2M</div>
       </div>
     </div>
   </div>
@@ -448,8 +487,8 @@
   <div class="insight-bar">
     <div class="insight-icon">◆</div>
     <div class="insight-text">
-      <strong>Q1 acumulado: 414 clientes y $369M en AUM con un AUM promedio de $892K.</strong>
-      Marzo: 114 clientes con AUM promedio $791K. Mix +$300K: 60% en marzo, 54% en Q1.
+      <strong>Q1 cierra con 414 clientes, $369M en AUM y un ticket promedio de $892K.</strong>
+      Marzo mantiene la calidad: 60% de cierres son +$300K (vs. 56% en Q1). El CAC sube a $7.9K en marzo — punto de atención para Q2 si no se escala volumen.
     </div>
   </div>
 
@@ -590,7 +629,7 @@
       <div class="insight-icon">◆</div>
       <div class="insight-text">
         <strong>Las acciones en marcha atacan la conversión a corto plazo; los proyectos habilitadores desbloquean escala.</strong>
-        El grupo especial de SQLs + redistribución de presupuesto a CFs top + reactivación de Performance Max son los motores de Q2.
+        Q1 cerró con conversión SQL→Cliente en 25% — a 10pp del target. El grupo especial de SQLs + redistribución de presupuesto a CFs top + reactivación de PMax son las palancas para cerrar la brecha en Q2.
       </div>
     </div>
   </div>
